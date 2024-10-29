@@ -1,0 +1,19 @@
+//user model 
+fullname 
+email
+password
+cart
+isadmin
+order
+contact no
+picture
+
+//product
+image
+name
+price
+discount price
+bgcolor
+textcolor
+
+//

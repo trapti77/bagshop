@@ -4,6 +4,7 @@ const isloggedin = require("../middlewares/isloggedin.middleware.js");
 const productModel = require("../models/product.model.js");
 const userModel = require("../models/user.model.js");
 const blogModel = require("../models/blog.models.js");
+const contactModel = require("../models/contact.models.js");
 
 router.get("/", function (req, res) {
   let error = req.flash("error");
@@ -58,12 +59,6 @@ router.get("/cart", isloggedin, async function (req, res) {
 router.get("/blog", isloggedin, async function (req, res) {
   const blogs = await blogModel.find();
   let success = req.flash("success");
-
-  /* products.image = products.image.buffer.toString("base64");
-  res.render("shop", { products });
-});
-router.get("/logout", isloggedin, function (req, res) {
-  res.render("shop");*/
   const updatedBlogs = blogs.map((blog) => {
     return {
       ...blog.toObject(),
@@ -71,6 +66,16 @@ router.get("/logout", isloggedin, function (req, res) {
     };
   });
   res.render("blog", { blogs: updatedBlogs, success });
+});
+router.get("/contact", isloggedin, async function (req, res) {
+  try {
+    const contacts = await contactModel.find();
+    let success = req.flash("success");
+    const updatedContacts = contacts.map((contact) => contact.toObject());
+    res.render("createcontact", { contacts: updatedContacts, success });
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
 });
 
 /*

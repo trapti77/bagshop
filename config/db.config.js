@@ -1,12 +1,13 @@
 const mongoose = require("mongoose");
-
+const dbgr = require("debug")("development:mongoose"); //namespace
+const config = require("config");
 mongoose
-  .connect("mongodb://localhost:27017/bagshop")
+  .connect(`${config.get("MONGODB_URI")}/bagshop`)
   .then(function () {
-    console.log("connected");
+    dbgr("connected");
   })
   .catch(function (err) {
-    console.log(err);
+    dbgr(err);
   });
 
 module.exports = mongoose.connection;

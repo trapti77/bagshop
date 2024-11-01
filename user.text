@@ -16,4 +16,11 @@ discount price
 bgcolor
 textcolor
 
-//
+//ROUTES
+
+/ ->signup/login
+/shop->shop
+/users/cart->cart
+/admin->admin panel
+/owner/products->show all products
+/owner/admin->show admin panel to create product

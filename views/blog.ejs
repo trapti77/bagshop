@@ -1,0 +1,175 @@
+
+  <!-- <%- include('./partials/header') %>
+<% if(success.length>0){ %>
+   <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-blue-500">
+        <span class="inline-block mt-1 mb-1 text-white">
+            <%= success %>
+        </span>
+    </div>
+    <% } %>
+    <div class="w-full h-screen flex items-start px-20 py-20">
+        <div class="w-[25%] flex h-screen flex-col items-start">
+            <div class="flex items-center gap-2">
+                <h3>sort by</h3>
+                <form action="/blog">
+                    <select class="border-[1px] px-2 py-1" name="sortby" id="">
+                        <option value="newest">Newest</option>
+                    </select>
+                </form>
+            </div>
+            <div class="flex flex-col mt-20">
+                <a class="block w-fit mb-2" href="">New Collection</a>
+                <a class="block w-fit mb-2" href="">All Blogs</a>
+            </div>
+        </div>
+        <div class="w-[75%] flex flex-col  gap-5 h-screen">
+            <div class="flex items-start gap-5">
+                <% blogs.forEach(function(blog){ %>
+                    <div class="w-60">
+                        <% if (blog.image) { %>
+                            <img class="h-[12rem]" src="data:image/jpeg;base64,<%= blog.image %>"
+                                alt="">
+                            <% } else { %>
+                                <div class="h-[12rem] flex items-center justify-center bg-gray-300">
+                                    <p>No Image Available</p> 
+                                </div>
+                                <% } %>
+                        </div>
+                                <h3>
+                                    <%= blog.email %>
+                                </h3>
+                                <h4 class="font-bold uppercase"><%= blog.title %>
+                                </h4>
+                                <h4 > <%= blog.content %>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+    </div>
+    <%- include('./partials/footer') %></div>-->
+    <%- include('./partials/header') %>
+    
+        <!-- Success Message -->
+        <% if(success.length> 0){ %>
+            <div
+                class="fixed top-5 left-1/2 transform -translate-x-1/2 z-50 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg">
+                <span class="block">
+                    <%= success %>
+                </span>
+            </div>
+            <% } %>
+    
+                <div class="min-h-screen bg-gray-50">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                        <div class="flex flex-col md:flex-row gap-8">
+                            <!-- Sidebar -->
+                            <aside class="w-full md:w-64 flex-shrink-0">
+                                <div class="bg-white rounded-lg shadow-sm p-6">
+                                    <!-- Sort Controls -->
+                                    <div class="mb-8">
+                                        <h3 class="text-lg font-semibold mb-4">Sort By</h3>
+                                        <form action="/blog" class="w-full">
+                                            <select name="sortby"
+                                                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                                onchange="this.form.submit()">
+                                                <option value="newest">Newest First</option>
+                                                <option value="oldest">Oldest First</option>
+                                                <option value="title">Title A-Z</option>
+                                                <option value="title-desc">Title Z-A</option>
+                                            </select>
+                                        </form>
+                                    </div>
+    
+                                    <!-- Navigation -->
+                                    <nav>
+                                        <h3 class="text-lg font-semibold mb-4">Categories</h3>
+                                        <div class="space-y-3">
+                                            <a href="/blog/new-collection"
+                                                class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-md transition-colors">
+                                                New Collection
+                                            </a>
+                                            <a href="/blog"
+                                                class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-md transition-colors">
+                                                All Blogs
+                                            </a>
+                                        </div>
+                                    </nav>
+                                </div>
+                            </aside>
+    
+                            <!-- Main Content -->
+                            <main class="flex-1">
+                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                    <% blogs.forEach(function(blog){ %>
+                                        <article
+                                            class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
+                                            <!-- Image Container -->
+                                            <div class="aspect-w-16 aspect-h-9">
+                                                <% if (blog.image) { %>
+                                                    <img src="data:image/jpeg;base64,<%= blog.image %>"
+                                                        alt="<%= blog.title %>" class="w-full h-48 object-cover"
+                                                        onerror="this.onerror=null; this.src='/images/blog-placeholder.jpg';" />
+                                                    <% } else { %>
+                                                        <div
+                                                            class="w-full h-48 bg-gray-200 flex items-center justify-center">
+                                                            <svg class="w-12 h-12 text-gray-400" fill="none"
+                                                                stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    stroke-width="2"
+                                                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                            </svg>
+                                                        </div>
+                                                        <% } %>
+                                            </div>
+    
+                                            <!-- Content -->
+                                             <div class="p-6">
+                                                
+                                            
+    
+                                                <h2 class="text-xl font-bold mb-2 text-gray-900">
+                                                    <%= blog.title %>
+                                                </h2>
+    
+                                                <p class="text-gray-600 line-clamp-3">
+                                                    <%= blog.content %>
+                                                </p>
+    
+                                                <div class="mt-4 flex justify-end">
+                                                    <a href="/blog/<%= blog._id %>"
+                                                        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                                        Read More
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </article>
+                                        <% }) %>
+                                </div>
+    
+                                <!-- Empty State -->
+                                <% if (blogs.length===0) { %>
+                                    <div class="text-center py-12">
+                                        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                        <h3 class="mt-2 text-sm font-medium text-gray-900">No blogs found</h3>
+                                        <p class="mt-1 text-sm text-gray-500">Get started by creating a new blog post.</p>
+                                        <div class="mt-6">
+                                            <a href="/createblog"
+                                                class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                                Create New Blog
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <% } %>
+                            </main>
+                        </div>
+                    </div>
+                </div>
+    
+                <%- include('./partials/footer') %>

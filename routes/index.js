@@ -67,14 +67,18 @@ router.get("/blog", isloggedin, async function (req, res) {
   });
   res.render("blog", { blogs: updatedBlogs, success });
 });
+
 router.get("/contact", isloggedin, async function (req, res) {
   try {
     const contacts = await contactModel.find();
     let success = req.flash("success");
-    const updatedContacts = contacts.map((contact) => contact.toObject());
-    res.render("createcontact", { contacts: updatedContacts, success });
+
+    const updatedContacts = contacts.map((contact) => contact.toObject()); // Convert each contact to plain object
+
+    res.render("admin", { contacts: updatedContacts, success });
   } catch (err) {
-    res.status(500).send(err.message);
+    req.flash("error", "Failed to load contacts.");
+    res.redirect("/error"); // Redirect to an error page or handle as preferred
   }
 });
 

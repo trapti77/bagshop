@@ -1,28 +1,36 @@
 const express = require("express");
 const router = express.Router();
 const contactModel = require("../models/contact.models.js");
-router.post("/create", async function (req, res) {
-  console.log(req.body);
+
+// Route for displaying the contact form
+router.get("/contact", (req, res) => {
+  const success = req.flash("success");
+  const error = req.flash("error");
+  res.render("contact", { success, error });
+});
+
+// Route for handling contact form submission
+router.post("/create", async (req, res) => {
   try {
     const { name, email, phone, message } = req.body;
-
-    // Validate fields are not empty
-    if (!name || !email || !phone || !message) {
-      req.flash("error", "All fields are required");
-      return res.redirect("/createcontact");
-    }
-
     const newContact = new contactModel({ name, email, phone, message });
     await newContact.save();
-    req.flash("success", "Contact created successfully");
-    res.redirect("/createcontact");
-  } catch (error) {
-    req.flash("error", error.message);
-    res.redirect("/createcontact");
+    req.flash("success", "Message submitted successfully.");
+    res.redirect("/owners/admin");
+  } catch (err) {
+    req.flash("error", "Failed to submit the message.");
+    res.redirect("/contact");
   }
 });
-router.get("/createcontacts", function (req, res) {
-  let success = req.flash("success");
-  res.render("createcontact", { success });
+
+// Route for displaying contacts in the admin page
+router.get("/admin/contact", async (req, res) => {
+  try {
+    const contacts = await contactModel.find();
+    res.render("admin", { contacts });
+  } catch (err) {
+    res.status(500).send("Error loading contact messages.");
+  }
 });
+
 module.exports = router;

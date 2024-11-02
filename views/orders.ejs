@@ -53,40 +53,32 @@
     <%- include('./partials/footer') %>-->
 <%- include('./partials/header') %>
 
-    <!-- Display success message if any -->
-    <% if (success && success.length> 0) { %> <!-- Check if success is defined -->
-        <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-blue-500">
-            <span class="inline-block mt-1 mb-1 text-white">
-                <%= success.join(", ") %> <!-- Join messages if there are multiple -->
-        </span>
+    <div class="container mx-auto py-10">
+        <h1 class="text-2xl font-bold mb-6">Your Orders</h1>
+
+        <% if (!payments || payments.length===0) { %>
+            <p>No orders found.</p>
+            <% } else { %>
+                <% payments.forEach((payment)=> { %>
+                    <div class="order border border-gray-300 p-4 mb-4 rounded">
+                        <h3 class="font-semibold">Order ID: <%= payment._id %>
+                        </h3>
+                        <p>Date: <%= new Date(payment.date).toLocaleDateString() %>
+                        </p>
+                        <p>Total Amount: ₹ <%= payment.amount.toFixed(2) %>
+                        </p>
+                        <p>Status: <%= payment.status %>
+                        </p>
+                        <ul>
+                            <% payment.items.forEach((item)=> { %>
+                                <li>
+                                    <%= item.name %> - ₹ <%= item.price.toFixed(2) %> x <%= item.quantity %>
+                                </li>
+                                <% }) %>
+                        </ul>
+                    </div>
+                    <% }) %>
+                        <% } %>
     </div>
-<% } %>
 
-<h1>Your Orders</h1>
-
-<!-- Check if payments is defined and has items -->
-<% if (!payments || payments.length === 0) { %>
-    <p>No orders found.</p>
-<% } else { %>
-    <% payments.forEach((payment) => { %>
-        <div class=" order">
-                    <h3>Order ID: <%= payment._id %>
-                    </h3>
-                    <p>Date: <%= new Date(payment.date).toLocaleDateString() %>
-                    </p>
-                    <p>Total Amount: ₹ <%= payment.amount.toFixed(2) %>
-                    </p>
-                    <p>Status: <%= payment.status %>
-                    </p>
-                    <ul>
-                        <% payment.items.forEach((item)=> { %>
-                            <li>
-                                <%= item.name %> - ₹ <%= item.price.toFixed(2) %> x <%= item.quantity %>
-                            </li>
-                            <% }) %>
-                    </ul>
-        </div>
-        <% }) %>
-            <% } %>
-
-                <%- include('./partials/footer') %>
+    <%- include('./partials/footer') %>

@@ -2,11 +2,18 @@ const express = require("express");
 const router = express.Router();
 const paymentModel = require("../models/payment.models.js");
 const isloggedin = require("../middlewares/isloggedin.middleware.js");
-router.post("/create", isloggedin, async (req, res) => {
-  const user = req.user; // Assuming user information is available in the request
+router.post("/payment", isloggedin, async (req, res) => {
+  const user = req.user; // Assuming user information is available in req.user
 
-  // Check if the user is authenticated and has a cart
-  if (!user || !user.cart || user.cart.length === 0) {
+  if (!user) {
+    return res.status(401).send("User not authenticated.");
+  }
+
+  // Extract payment details from the form
+  const { cardName, cardNumber, expiryDate, cvv } = req.body;
+
+  // Check if the user and cart exist and have items
+  if (!user.cart || user.cart.length === 0) {
     return res.redirect("/shop"); // Redirect to the shop if the cart is empty
   }
 
@@ -16,25 +23,22 @@ router.post("/create", isloggedin, async (req, res) => {
     0
   );
 
-  // Extract payment details from the form
-  const { cardNumber, expiryDate, cvv, cardName } = req.body;
-
-  // Validate payment details
-  if (!cardNumber || !expiryDate || !cvv || !cardName) {
+  // Simple payment validation for demonstration
+  if (!cardName || !cardNumber || !expiryDate || !cvv) {
     return res
       .status(400)
       .send("Payment details are incomplete. Please try again.");
   }
 
-  // Simulate payment processing logic (replace this with actual payment gateway logic)
-  const isPaymentSuccessful = true; // Simulate a successful payment
+  // Simulate payment processing logic
+  const isPaymentSuccessful = true; // Replace with actual payment gateway logic
 
   if (isPaymentSuccessful) {
-    // Create a new payment record
-    const payment = new paymentModel({
+    // Create payment record in the database
+    const paymentData = {
       userId: user._id,
       amount: totalAmount,
-      status: "completed", // Set the payment status to completed
+      status: "completed",
       cardDetails: {
         cardNumber,
         cardName,
@@ -47,25 +51,33 @@ router.post("/create", isloggedin, async (req, res) => {
         price: item.price,
         quantity: item.quantity,
       })),
-    });
-    await payment.save();
+    };
 
-    // Clear the user's cart after successful payment
-    user.cart = []; // Clear the cart
-    await user.save(); // Save the updated user data
-    res.render("payment", { totalAmount });
-    res.redirect("/success"); // Redirect to a success page
+    const payment = new paymentModel(paymentData);
+
+    try {
+      await payment.save();
+      // Clear the user's cart after successful payment
+      user.cart = []; // Clear the cart array
+      await user.save();
+
+      res.redirect("/success"); // Redirect to success page
+    } catch (error) {
+      console.error("Error saving payment:", error);
+      res.status(500).send("Error processing payment. Please try again.");
+    }
   } else {
     // Handle payment failure
     res.status(500).send("Payment failed. Please try again.");
   }
 });
-router.get("/payment", async (req, res) => {
-  const user = req.user; // Get the currently logged-in user
 
-  // Check if the user and cart exist
+// Route to view payment page
+router.get("/payment", async (req, res) => {
+  const user = req.user; // Assuming user information is available in req.user
+
   if (!user || !user.cart || user.cart.length === 0) {
-    return res.redirect("/shop"); // Redirect to the shop if the cart is empty
+    return res.redirect("/shop"); // Redirect to shop if the cart is empty
   }
 
   // Calculate total amount from cart items
@@ -74,8 +86,8 @@ router.get("/payment", async (req, res) => {
     0
   );
 
-  // Render the payment page with total amount
-  res.render("payment", { totalAmount }); // Ensure totalAmount is passed here
+  // Render payment page with total amount
+  res.render("payment", { totalAmount }); // Pass totalAmount to the payment view
 });
 
 router.get("/success", (req, res) => {

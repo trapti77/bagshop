@@ -53,7 +53,7 @@ router.get("/account", isloggedin, async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
-router.get("/orders", isloggedin, async (req, res) => {
+/*router.get("/orders", isloggedin, async (req, res) => {
   try {
     const user = await userModel
       .findById(req.user._id)
@@ -70,8 +70,8 @@ router.get("/orders", isloggedin, async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
-
-router.get("/user/orders", async (req, res) => {
+*/
+router.get("/users/orders", async (req, res) => {
   try {
     const user = req.user; // Assuming req.user is set by authentication middleware
 
@@ -80,7 +80,8 @@ router.get("/user/orders", async (req, res) => {
     }
 
     // Fetch the user's orders/payments
-    const payments = await Payment.find({ userId: user._id })
+    const payments = await paymentModel
+      .find({ userId: user._id })
       .sort({ date: -1 })
       .lean();
 

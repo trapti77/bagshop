@@ -35,11 +35,68 @@ router.get("/addtocart/:productid", isloggedin, async function (req, res) {
   res.redirect("/shop");
 });
 
+/*router.get("/addtocart/:productid", isloggedin, async function (req, res) {
+  try {
+    // Find the user by email
+    let user = await userModel.findOne({ email: req.user.email });
+
+    // Find the product by ID
+    let product = await productModel.findById(req.params.productid);
+    if (!product) {
+      req.flash("error", "Product not found");
+      return res.redirect("/shop");
+    }
+
+    // Create a product object to store in the cart
+    const productData = {
+      id: product._id,
+      name: product.name,
+      price: product.price,
+      discount: product.discount,
+      image: product.image,
+      quantity: 1, // Assuming you want to start with 1 quantity
+    };
+
+    // Check if the product is already in the cart
+    const existingProductIndex = user.cart.findIndex(
+      (item) => item.id.toString() === productData.id.toString()
+    );
+    if (existingProductIndex !== -1) {
+      // If the product is already in the cart, increase the quantity
+      user.cart[existingProductIndex].quantity += 1;
+    } else {
+      // If it's a new product, push the productData to the cart
+      user.cart.push(productData);
+    }
+
+    // Save the user
+    await user.save();
+    req.flash("success", "Added to cart");
+    res.redirect("/shop");
+  } catch (error) {
+    console.error("Error adding to cart:", error);
+    req.flash("error", "There was an error adding the product to your cart");
+    res.redirect("/shop");
+  }
+});*/
+
+router.post("/cart/delete/:productid", async (req, res) => {
+  try {
+    const itemId = req.params.id;
+    console.log(itemId);
+    req.user.cart = req.user.cart.filter((item) => item.id !== itemId); // Remove item by ID
+    await req.user.save(); // Save updated cart
+    res.redirect("/cart");
+  } catch (error) {
+    console.error("Error deleting item from cart:", error);
+    res.status(500).send("Server error");
+  }
+});
 router.get("/cart", isloggedin, async function (req, res) {
   let user = await userModel
     .findOne({ email: req.user.email })
     .populate("cart");
-
+  let bill;
   if (user.cart && user.cart.length > 0) {
     // Calculate the total bill
     bill = user.cart.reduce((acc, item) => {

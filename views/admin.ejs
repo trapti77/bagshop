@@ -182,7 +182,7 @@
         </div>
     
         <%- include('./partials/footer') %>-->
-    <%- include('./partials/header') %>
+ <!-- <%- include('./partials/header') %>
     
         <% if (typeof success !=='undefined' && success.length> 0) { %>
             <div
@@ -194,7 +194,7 @@
             <% } %>
     
                 <div class="min-h-screen bg-gray-50 flex">
-                    <!-- Sidebar Navigation -->
+                  
                     <div class="w-64 bg-white shadow-lg p-6">
                         <nav class="space-y-4">
                             <a href="/shop"
@@ -216,9 +216,9 @@
                         </nav>
                     </div>
     
-                    <!-- Main Content Area -->
+                    
                     <div class="flex-1 p-8 overflow-auto">
-                        <!-- Blogs Section -->
+                       
                        <section class="mb-12">
                             <h2 class="text-2xl font-bold mb-6 text-gray-800">Blogs</h2>
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -251,12 +251,13 @@
                                                 <%= blog.content %>
                                             </p>
                                         </div>
+                                        
                                     </div>
                                     <% }); %>
                             </div>
                         </section>
                         
-                        <!-- Products Section -->
+                       
                         <section>
                             <h2 class="text-2xl font-bold mb-6 text-gray-800">Products</h2>
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -301,7 +302,7 @@
                                     <% }); %>
                             </div>
                         </section>
-                        <!--Contact section  -->
+                       
                         <section class="mb-12">
                             <h2 class="text-2xl font-bold mb-6 text-gray-800">Contacts</h2>
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -328,4 +329,142 @@
                     </div>
                 </div>
     
-                <%- include('./partials/footer') %>
+                <%- include('./partials/footer') %>-->
+             <%- include('./partials/header') %>
+                
+                    <% if (typeof success !=='undefined' && success.length> 0) { %>
+                        <div
+                            class="fixed top-5 left-1/2 transform -translate-x-1/2 z-50 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg">
+                            <span>
+                                <%= success %>
+                            </span>
+                        </div>
+                        <% } %>
+                
+                            <div class="min-h-screen bg-gray-50 flex">
+                               
+                                <aside class="w-64 bg-white shadow-lg p-6">
+                                    <nav class="space-y-4">
+                                        <a href="/shop"
+                                            class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">
+                                            All Products
+                                        </a>
+                                        <a href="/createproducts"
+                                            class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">
+                                            Create New Product
+                                        </a>
+                                        <a href="/blog"
+                                            class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">
+                                            All Blogs
+                                        </a>
+                                        <a href="/createblog"
+                                            class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors">
+                                            Create New Blog
+                                        </a>
+                                    </nav>
+                                </aside>
+                
+                               
+                                <main class="flex-1 p-8 overflow-auto">
+                                    
+                                    <section class="mb-12">
+                                        <h2 class="text-2xl font-bold mb-6 text-gray-800">Blogs</h2>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                            <% blogs.forEach(function(blog) { %>
+                                                <div class="bg-white rounded-lg shadow-md overflow-hidden relative">
+                                                    <div class="aspect-w-16 aspect-h-9">
+                                                        <% if (blog.image && blog.image.length> 0) { %>
+                                                            <img src="data:image/jpeg;base64,<%= blog.image.toString('base64') %>" alt="<%= blog.title %>"
+                                                                class="w-full h-48 object-cover" />
+                                                            <% } else { %>
+                                                                <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
+                                                                    <i class="ri-image-line text-gray-400 text-4xl"></i>
+                                                                </div>
+                                                                <% } %>
+                                                    </div>
+                                                    <div class="p-4">
+                                                        <h3 class="font-semibold text-lg mb-2">
+                                                            <%= blog.title %>
+                                                        </h3>
+                                                        <p class="text-gray-600 text-sm mb-2">
+                                                            <%= blog.email %>
+                                                        </p>
+                                                        <p class="text-gray-700 line-clamp-3">
+                                                            <%= blog.content %>
+                                                        </p>
+                                                    </div>
+                                                    <a href="/blog/delete/<%= blog._id %>"
+                                                        class="absolute top-2 right-2 bg-red-500 text-white p-2 rounded-full hover:bg-red-600">
+                                                        <i class="ri-delete-bin-6-line"></i>
+                                                    </a>
+                                                </div>
+                                                <% }); %>
+                                        </div>
+                                    </section>
+                
+                                   
+                                    <section class="mb-12">
+                                        <h2 class="text-2xl font-bold mb-6 text-gray-800">Products</h2>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                            <% products.forEach(function(product) { %>
+                                                <div class="bg-white rounded-lg shadow-md overflow-hidden relative">
+                                                    <div class="aspect-w-16 aspect-h-9">
+                                                        <% if (product.image && product.image.length> 0) { %>
+                                                            <img src="data:image/jpeg;base64,<%= product.image.toString('base64') %>"
+                                                                alt="<%= product.name %>" class="w-full h-48 object-cover" />
+                                                            <% } else { %>
+                                                                <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
+                                                                    <i class="ri-image-line text-gray-400 text-4xl"></i>
+                                                                </div>
+                                                                <% } %>
+                                                    </div>
+                                                    <div class="p-4">
+                                                        <div class="flex justify-between items-center">
+                                                            <div>
+                                                                <h3 class="font-semibold text-lg">
+                                                                    <%= product.name %>
+                                                                </h3>
+                                                                <p class="text-gray-600">₹ <%= product.price.toLocaleString() %>
+                                                                </p>
+                                                            </div>
+                                                            <a href="/cart/add/<%= product._id %>"
+                                                                class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-600 text-white transition-colors">
+                                                                <i class="ri-add-line"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <a href="/product/delete/<%= product._id %>"
+                                                        class="absolute top-2 right-2 bg-red-500 text-white p-2 rounded-full hover:bg-red-600">
+                                                        <i class="ri-delete-bin-6-line"></i>
+                                                    </a>
+                                                </div>
+                                                <% }); %>
+                                        </div>
+                                    </section>
+                
+                                  
+                                    <section class="mb-12">
+                                        <h2 class="text-2xl font-bold mb-6 text-gray-800">Contacts</h2>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                            <% contacts.forEach(function(contact) { %>
+                                                <div class="bg-white rounded-lg shadow-md overflow-hidden p-4">
+                                                    <h3 class="font-semibold text-lg mb-2">
+                                                        <%= contact.name %>
+                                                    </h3>
+                                                    <p class="text-gray-600 text-sm mb-2">
+                                                        <%= contact.email %>
+                                                    </p>
+                                                    <p class="text-gray-600 text-sm mb-2">
+                                                        <%= contact.phone %>
+                                                    </p>
+                                                    <p class="text-gray-700">
+                                                        <%= contact.message %>
+                                                    </p>
+                                                </div>
+                                                <% }); %>
+                                        </div>
+                                    </section>
+                                </main>
+                            </div>
+                
+                            <%- include('./partials/footer') %>

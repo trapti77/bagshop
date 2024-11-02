@@ -81,7 +81,26 @@ router.get("/contact", isloggedin, async function (req, res) {
     res.redirect("/error"); // Redirect to an error page or handle as preferred
   }
 });
-
+router.get("/blog/delete/:id", async (req, res) => {
+  try {
+    const blogId = req.params.id;
+    await blogModel.findByIdAndDelete(blogId);
+    res.redirect("/blog?success=Blog deleted successfully");
+  } catch (error) {
+    console.error("Error deleting blog:", error);
+    res.redirect("/blog?error=Failed to delete blog");
+  }
+});
+router.get("/product/delete/:id", async (req, res) => {
+  try {
+    const productId = req.params.id;
+    await productModel.findByIdAndDelete(productId);
+    res.redirect("/shop?success=Product deleted successfully");
+  } catch (error) {
+    console.error("Error deleting product:", error);
+    res.redirect("/shop?error=Failed to delete product");
+  }
+});
 /*
   let bill = 0;
   if (user.cart && user.cart.length > 0) {

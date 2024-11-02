@@ -464,6 +464,34 @@
                                                 <% }); %>
                                         </div>
                                     </section>
+                                    <section class="mb-12">
+                                        <h2 class="text-2xl font-bold mb-6 text-gray-800">All Orders</h2>
+                                        <% if (orders.length===0) { %>
+                                            <p>No orders found.</p>
+                                            <% } else { %>
+                                                <% orders.forEach((order)=> { %>
+                                                    <div class="order">
+                                                        <h3>Order ID: <%= order._id %>
+                                                        </h3>
+                                                        <p>User: <%= order.userId.name %> (<%= order.userId.email %>)</p>
+                                                        <p>Date: <%= order.date.toDateString() %>
+                                                        </p>
+                                                        <p>Total Amount: ₹ <%= order.amount %>
+                                                        </p>
+                                                        <p>Status: <%= order.status %>
+                                                        </p>
+                                                        <ul>
+                                                            <% order.items.forEach((item)=> { %>
+                                                                <li>
+                                                                    <%= item.name %> - ₹ <%= item.price %> x <%= item.quantity %>
+                                                                </li>
+                                                                <% }) %>
+                                                        </ul>
+                                                    </div>
+                                                    <% }) %>
+                                                        <% } %>
+
+                                    </section>
                                 </main>
                             </div>
                 

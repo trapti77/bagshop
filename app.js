@@ -8,6 +8,7 @@ const usersRouter = require("./routes/users.routes.js");
 const productsRouter = require("./routes/products.routes.js");
 const blogRouter = require("./routes/blog.routes.js");
 const contactRouter = require("./routes/contact.routes.js");
+const paymentRouter = require("./routes/payment.routes.js");
 const indexRouter = require("./routes/index.js");
 const dotenv = require("dotenv");
 const expressSession = require("express-session");
@@ -32,6 +33,7 @@ app.use("/users", usersRouter);
 app.use("/products", productsRouter);
 app.use("/blogs", blogRouter);
 app.use("/contacts", contactRouter);
+app.use("/payments", paymentRouter);
 app.use("/", indexRouter);
 
 app.listen(1600);

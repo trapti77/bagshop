@@ -4,6 +4,7 @@ const ownerModel = require("../models/owner.model.js");
 const ProductModel = require("../models/product.model.js");
 const BlogModel = require("../models/blog.models.js");
 const ContactModel = require("../models/contact.models.js");
+const paymentModel = require("../models/payment.models.js");
 const upload = require("../config/multer.config.js");
 
 if (process.env.NODE_ENV === "development") {
@@ -40,8 +41,9 @@ router.get("/admin", async (req, res) => {
     const blogs = await BlogModel.find(); // Fetch blogs
     const products = await ProductModel.find(); // Fetch products
     const contacts = await ContactModel.find();
+    const orders = await paymentModel.find();
 
-    res.render("admin", { success, blogs, products, contacts });
+    res.render("admin", { success, blogs, products, contacts, orders });
   } catch (error) {
     console.error("Error fetching data:", error);
     res.status(500).send("An error occurred while fetching data.");
@@ -57,5 +59,17 @@ router.get("/admin/contacts", async (req, res) => {
     res.status(500).send("Failed to retrieve messages");
   }
 });
+router.get("/admin/orders", async (req, res) => {
+  try {
+    const orders = await paymentModel
+      .find()
+      .populate("userId", "name email")
+      .sort({ date: -1 });
 
+    res.render("admin/orders", { orders });
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    res.status(500).send("Error fetching orders. Please try again.");
+  }
+});
 module.exports = router;

@@ -4,8 +4,11 @@ const jwt = require("jsonwebtoken");
 const { generateToken } = require("../utils/generateToken.js");
 module.exports.registerUser = async function (req, res) {
   try {
-    let { fullname, email, password } = req.body;
-
+    let { fullname, email, password, contact } = req.body;
+    if (!req.file) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
+    const buffer = req.file.buffer;
     let user = await userModel.findOne({ email: email });
 
     if (user)
@@ -17,9 +20,11 @@ module.exports.registerUser = async function (req, res) {
         if (err) return res.send(err.message);
         else {
           let user = await userModel.create({
+            image: buffer,
             fullname,
             email,
             password: hash,
+            contact,
           });
           let token = generateToken(user);
           res.cookie("token", token);

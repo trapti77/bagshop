@@ -1,0 +1,175 @@
+<!--<%- include('./partials/header') %>
+    <header>
+        <h1>Account Information</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Contact Information</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="aspect-w-16 aspect-h-9">
+                    <% if (user.image && user.image.length> 0) { %>
+                        <img src="data:image/jpeg;base64,<%= user.image.toString('base64') %>"
+                            alt="<%= user.fullname %>" class="w-full h-48 object-cover" />
+                        <% } else { %>
+                            <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
+                                <i class="ri-image-line text-gray-400 text-4xl"></i>
+                            </div>
+                            <% } %>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden p-4">
+                    <h3 class="font-semibold text-lg mb-2">
+                        <%= user.fullname %>
+                    </h3>
+                    <p class="text-gray-600 text-sm mb-2">
+                        <%= user.email %>
+                    </p>
+                    <p class="text-gray-600 text-sm mb-2">
+                        <%= user.contact %>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="edit-profile">
+            <h2>Edit Profile</h2>
+            <form action="/account/edit" method="POST" enctype="multipart/form-data">
+                <label for="profilePhoto">Profile Photo:</label>
+                <input type="file" id="profilePhoto" name="profilePhoto" accept="image/*">
+
+                <label for="name">Name:</label>
+                <input type="text" id="fullname" name="name" value="<%= user.fullname %>" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="<%= user.email %>" required>
+
+                <label for="mobileNumber">Mobile Number:</label>
+                <input type="text" id="contact" name="mobileNumber" value="<%= user.contact %>" required>
+
+                <button type="submit">Update Profile</button>
+            </form>
+        </section>
+
+        <section class="change-password">
+            <h2>Change Password</h2>
+            <form action="/account/change-password" method="POST">
+                <label for="currentPassword">Current Password:</label>
+                <input type="password" id="currentPassword" name="currentPassword" required>
+
+                <label for="newPassword">New Password:</label>
+                <input type="password" id="newPassword" name="newPassword" required>
+
+                <label for="confirmPassword">Confirm New Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+
+                <button type="submit">Change Password</button>
+            </form>
+        </section>
+    </main>
+    <%- include('./partials/footer') %>-->
+    <%- include('./partials/header') %>
+        <header>
+            <h1>Account Information</h1>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/logout">Logout</a>
+            </nav>
+        </header>
+    
+        <main>
+            <section class="mb-12">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">Contact Information</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="aspect-w-16 aspect-h-9">
+                        <% if (user.image && user.image.length> 0) { %>
+                            <img src="data:image/jpeg;base64,<%= user.image.toString('base64') %>"
+                                alt="<%= user.fullname %>" class="w-full h-48 object-cover" />
+                            <% } else { %>
+                                <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
+                                    <i class="ri-image-line text-gray-400 text-4xl"></i>
+                                </div>
+                                <% } %>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden p-4">
+                        <h3 class="font-semibold text-lg mb-2">
+                            <%= user.fullname %>
+                        </h3>
+                        <p class="text-gray-600 text-sm mb-2">
+                            <%= user.email %>
+                        </p>
+                        <p class="text-gray-600 text-sm mb-2">
+                            <%= user.contact %>
+                        </p>
+                        <p class="text-gray-600 text-sm mb-2">
+                            Total Spent: $<%= user.totalSpent.toFixed(2) %>
+                        </p>
+                        <p class="text-gray-600 text-sm mb-2">
+                            Total Orders: <%= totalOrders %>
+                        </p>
+                    </div>
+                </div>
+            </section>
+    
+            <section class="order-history mb-12">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">Order History</h2>
+                <% if (user.orders && user.orders.length> 0) { %>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <% user.orders.forEach(order=> { %>
+                            <div class="bg-white rounded-lg shadow-md overflow-hidden p-4">
+                                <h3 class="font-semibold text-lg mb-2">
+                                    Product: <%= order.productId.name %>
+                                </h3>
+                                <p class="text-gray-600 text-sm mb-2">
+                                    Quantity: <%= order.quantity %>
+                                </p>
+                                <p class="text-gray-600 text-sm mb-2">
+                                    Date: <%= order.purchaseDate.toLocaleDateString() %>
+                                </p>
+                            </div>
+                            <% }) %>
+                    </div>
+                    <% } else { %>
+                        <p>No orders found.</p>
+                        <% } %>
+            </section>
+    
+            <section class="edit-profile">
+                <h2>Edit Profile</h2>
+                <form action="/account/edit" method="POST" enctype="multipart/form-data">
+                    <label for="profilePhoto">Profile Photo:</label>
+                    <input type="file" id="profilePhoto" name="profilePhoto" accept="image/*">
+    
+                    <label for="fullname">Name:</label>
+                    <input type="text" id="fullname" name="name" value="<%= user.fullname %>" required>
+    
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="<%= user.email %>" required>
+    
+                    <label for="contact">Mobile Number:</label>
+                    <input type="text" id="contact" name="mobileNumber" value="<%= user.contact %>" required>
+    
+                    <button type="submit">Update Profile</button>
+                </form>
+            </section>
+    
+            <section class="change-password">
+                <h2>Change Password</h2>
+                <form action="/account/change-password" method="POST">
+                    <label for="currentPassword">Current Password:</label>
+                    <input type="password" id="currentPassword" name="currentPassword" required>
+    
+                    <label for="newPassword">New Password:</label>
+                    <input type="password" id="newPassword" name="newPassword" required>
+    
+                    <label for="confirmPassword">Confirm New Password:</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+    
+                    <button type="submit">Change Password</button>
+                </form>
+            </section>
+        </main>
+        <%- include('./partials/footer') %>

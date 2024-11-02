@@ -1,0 +1,92 @@
+<!--<%- include('./partials/header') %>
+
+    <main>
+        <section class="order-list">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Order Details</h2>
+
+            <% if (orders && orders.length> 0) { %>
+                <% orders.forEach(order=> { %>
+                    <div class="order-item bg-white rounded-lg shadow-md p-4 mb-6">
+                        <h3 class="text-lg font-semibold mb-2">
+                            Order ID: <%= order._id %>
+                        </h3>
+
+                        <% if (order.productId) { %>
+                            <div class="product-info grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="aspect-w-16 aspect-h-9">
+                                    <% if (order.productId.image && order.productId.image.length> 0) { %>
+                                        <img src="data:image/jpeg;base64,<%= order.productId.image.toString('base64') %>"
+                                            alt="<%= order.productId.name %>" class="w-full h-48 object-cover" />
+                                        <% } else { %>
+                                            <div class="w-full h-48 bg-gray-200 flex items-center justify-center">
+                                                <i class="ri-image-line text-gray-400 text-4xl"></i>
+                                            </div>
+                                            <% } %>
+                                </div>
+                                <div class="product-details">
+                                    <p class="text-gray-800 text-sm font-semibold">
+                                        Product Name: <%= order.productId.name %>
+                                    </p>
+                                    <p class="text-gray-600 text-sm">
+                                        Quantity: <%= order.quantity %>
+                                    </p>
+                                    <p class="text-gray-600 text-sm">
+                                        Price: $<%= order.productId.price %>
+                                    </p>
+                                </div>
+                            </div>
+                            <% } else { %>
+                                <p class="text-gray-600 text-sm">
+                                    Product information is unavailable.
+                                </p>
+                                <% } %>
+                    </div>
+                    <% }) %>
+                        <% } else { %>
+                            <p class="text-gray-600 text-center">
+                                You have no orders yet.
+                            </p>
+                            <% } %>
+        </section>
+    </main>
+
+    <%- include('./partials/footer') %>-->
+<%- include('./partials/header') %>
+
+    <!-- Display success message if any -->
+    <% if (success && success.length> 0) { %> <!-- Check if success is defined -->
+        <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-blue-500">
+            <span class="inline-block mt-1 mb-1 text-white">
+                <%= success.join(", ") %> <!-- Join messages if there are multiple -->
+        </span>
+    </div>
+<% } %>
+
+<h1>Your Orders</h1>
+
+<!-- Check if payments is defined and has items -->
+<% if (!payments || payments.length === 0) { %>
+    <p>No orders found.</p>
+<% } else { %>
+    <% payments.forEach((payment) => { %>
+        <div class=" order">
+                    <h3>Order ID: <%= payment._id %>
+                    </h3>
+                    <p>Date: <%= new Date(payment.date).toLocaleDateString() %>
+                    </p>
+                    <p>Total Amount: ₹ <%= payment.amount.toFixed(2) %>
+                    </p>
+                    <p>Status: <%= payment.status %>
+                    </p>
+                    <ul>
+                        <% payment.items.forEach((item)=> { %>
+                            <li>
+                                <%= item.name %> - ₹ <%= item.price.toFixed(2) %> x <%= item.quantity %>
+                            </li>
+                            <% }) %>
+                    </ul>
+        </div>
+        <% }) %>
+            <% } %>
+
+                <%- include('./partials/footer') %>

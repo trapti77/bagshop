@@ -1,0 +1,89 @@
+<!--<%- include('./partials/header') %>
+
+    <div class="w-full min-h-screen flex items-center justify-center bg-gray-100 py-10">
+        <div class="w-full max-w-lg bg-white p-8 rounded-lg shadow-md">
+            <h1 class="text-3xl font-bold text-gray-800 mb-6">Payment Information</h1>
+
+            <div class="mb-6">
+                <h2 class="text-lg font-semibold text-gray-700">Order Total: ₹ <%= totalAmount %>
+                </h2>
+            </div>
+
+         
+            <form action="/payments/create" method="POST" class="space-y-4" enctype="multipart/form-data">
+                <div>
+                    <label for="cardNumber" class="block text-gray-600 mb-1">Card Number</label>
+                    <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                        required>
+                </div>
+
+                <div class="flex gap-4">
+                    <div class="flex-1">
+                        <label for="expiryDate" class="block text-gray-600 mb-1">Expiry Date</label>
+                        <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY"
+                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                            required>
+                    </div>
+                    <div class="flex-1">
+                        <label for="cvv" class="block text-gray-600 mb-1">CVV</label>
+                        <input type="text" id="cvv" name="cvv" placeholder="123"
+                            class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                            required>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="cardName" class="block text-gray-600 mb-1">Name on Card</label>
+                    <input type="text" id="cardName" name="cardName" placeholder="John Doe"
+                        class="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                        required>
+                </div>
+
+                <button type="submit"
+                    class="w-full mt-6 py-3 bg-blue-600 text-white font-semibold text-lg rounded-lg hover:bg-blue-700">
+                    Complete Payment
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <%- include('./partials/footer') %>-->
+<%- include('./partials/header') %>
+
+    <div class="container mx-auto py-10">
+        <h1 class="text-2xl font-bold mb-6">Payment Information</h1>
+
+        <form action="/payments/create" method="POST">
+            <div class="mb-6">
+                <h2 class="text-lg font-semibold text-gray-700">Order Total: ₹ <%= totalAmount.toFixed(2) %>
+                </h2>
+            </div>
+
+            <div class="mb-6">
+                <label for="cardName" class="block text-gray-700">Cardholder Name</label>
+                <input type="text" name="cardName" id="cardName" required class="border border-gray-300 p-2 w-full" />
+            </div>
+
+            <div class="mb-6">
+                <label for="cardNumber" class="block text-gray-700">Card Number</label>
+                <input type="text" name="cardNumber" id="cardNumber" required
+                    class="border border-gray-300 p-2 w-full" />
+            </div>
+
+            <div class="mb-6">
+                <label for="expiryDate" class="block text-gray-700">Expiry Date (MM/YY)</label>
+                <input type="text" name="expiryDate" id="expiryDate" required
+                    class="border border-gray-300 p-2 w-full" />
+            </div>
+
+            <div class="mb-6">
+                <label for="cvv" class="block text-gray-700">CVV</label>
+                <input type="text" name="cvv" id="cvv" required class="border border-gray-300 p-2 w-full" />
+            </div>
+
+            <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Proceed to Payment</button>
+        </form>
+    </div>
+
+    <%- include('./partials/footer') %>

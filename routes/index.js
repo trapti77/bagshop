@@ -158,16 +158,7 @@ router.get("/product/delete/:id", async (req, res) => {
     res.redirect("/shop?error=Failed to delete product");
   }
 });
-/*
-  let bill = 0;
-  if (user.cart && user.cart.length > 0) {
-    return (bill =
-      Number(user.cart[item].price + 20) - Number(user.cart[item].discount));
-  }
-
-  res.render("cart", { user, bill });
-
-  //res.render("cart", { user, bill });
-});*/
+// routes/shop.routes.js
+// Assuming user is logged in and available through req.user
 
 module.exports = router;

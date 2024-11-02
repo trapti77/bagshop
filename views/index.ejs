@@ -12,16 +12,19 @@
                     <div class="w-full px-32">
                         <h3 class="text-4xl">welcome to <span class="text-blue-400 font-semibold">Scatch</span></h3>
                         <h4 class="text-2xl mb-5">create your account</h4>
-                        <form autocomplete="off" action="/users/register" method="post">
+                        <form autocomplete="off" action="/users/register" method="post" enctype="multipart/form-data">
                             <input
                                 class="bg-zinc-100 block w-full px-3 py-2 border-[1px] rounded-md mb-3 border-zinc-200"
                                 type="text" placeholder="Full Name" name="fullname">
                             <input
                                 class="bg-zinc-100 block w-full px-3 py-2 border-[1px] rounded-md mb-3 border-zinc-200"
                                 type="email" placeholder="Email" name="email">
+                            <input class="bg-zinc-100 block w-full px-3 py-2 border-[1px] rounded-md mb-3 border-zinc-200" type="text"
+                                    placeholder="Contact" name="contact">
                             <input
                                 class="bg-zinc-100 block w-full px-3 py-2 border-[1px] rounded-md mb-3 border-zinc-200"
                                 type="password" placeholder="Password" name="password">
+                                <input name="image" type="file" class="py-2 px-4 rounded" value="Select File">
                             <input class="px-5 rounded-full py-3 mt-2 bg-blue-500 text-white" type="submit"
                                 value="Create My Account">
                         </form>

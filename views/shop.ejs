@@ -280,29 +280,49 @@
                                     <% } %>
                             
                                         <div class="w-full h-full flex flex-col items-start px-20 py-20 bg-yellow-200">
-                            
+                                            <div class="w-full bg-yellow-200 shadow-lg mb-10 flex flex-row">
+                                                <div class="flex justify-between items-center px-20 py-4">
+                                                    <div class="flex items-center gap-4 text-orange-500">
+                                                        <h3 class="font-semibold">Sort by:</h3>
+                                                        <form action="/shop">
+                                                            <select class="border border-gray-400 px-2 py-1 rounded" name="sortby">
+                                                                <option value="popular">Popular</option>
+                                                                <option value="newest">Newest</option>
+                                                            </select>
+                                                        </form>
+                                                    </div>
+                                                    <div class="flex space-x-10">
+                                                        <a class="text-orange-500 hover:underline" href="">New Collection</a>
+                                                        <a class="text-orange-500 hover:underline" href="">All Products</a>
+                                                        <a class="text-orange-500 hover:underline" href="">Discounted Products</a>
+                                                        <a class="text-orange-500 hover:underline" href="">Filter by:</a>
+                                                        <a class="text-orange-500 hover:underline" href="">Availability</a>
+                                                        <a class="text-orange-500 hover:underline" href="">Discount</a>
+                                                    </div>
+                                                </div>
+                                                </div>
                                             <!-- Slide Section (Carousel) -->
                                             <div class="w-full mb-10">
                                                 <div class="relative overflow-hidden rounded-md shadow-lg">
-                                                    <div class="carousel flex transition-transform duration-500 ease-out" style="height:70vh;width:100%" id="carousel">
+                                                    <div class="carousel flex transition-transform duration-500 ease-out" style="height:70vh;" id="carousel">
                                                         <!-- Slide 1 with random image -->
                                                         <div class="min-w-full h-84 flex items-center justify-center bg-blue-500">
-                                                            <img src="https://via.placeholder.com/800x400?text=Slide+1" alt="Slide 1"
+                                                            <img src="/images/shoes18.webp" alt="Slide 1"
                                                                 class="h-full object-cover w-full">
                                                         </div>
                                                         <!-- Slide 2 with random image -->
                                                         <div class="min-w-full h-84 flex items-center justify-center bg-blue-500">
-                                                            <img src="https://via.placeholder.com/800x400?text=Slide+2" alt="Slide 2"
+                                                            <img src="/images/shoes31.jpeg" alt="Slide 2"
                                                                 class="h-full object-cover w-full">
                                                         </div>
                                                         <!-- Slide 3 with random image -->
                                                         <div class="min-w-full h-84 flex items-center justify-center bg-blue-500">
-                                                            <img src="https://via.placeholder.com/800x400?text=Slide+3" alt="Slide 3"
+                                                            <img src="/images/shoes30.jpeg" alt="Slide 3"
                                                                 class="h-full object-cover w-full">
                                                         </div>
                                                         <!--slode4-->
                                                         <div class="min-w-full h-84 flex items-center justify-center bg-blue-500">
-                                                            <img src="https://via.placeholder.com/800x400?text=Slide+3" alt="Slide 4" class="h-full object-cover w-full">
+                                                            <img src="/images/shoes27.jpeg" alt="Slide 4" class="h-full object-cover w-full">
                                                         </div>
                                                     </div>
                                                     <!-- Carousel Controls -->
@@ -317,27 +337,8 @@
                             
                                             <!-- Products Section -->
                                             <div class="w-full flex flex-col gap-5 h-screen">
-                                                <div class="w-full bg-yellow-200 shadow-lg mb-10 flex flex-row">
-                                                    <div class="flex justify-between items-center px-20 py-4">
-                                                        <div class="flex items-center gap-4 text-orange-500">
-                                                            <h3 class="font-semibold">Sort by:</h3>
-                                                            <form action="/shop">
-                                                                <select class="border border-gray-400 px-2 py-1 rounded" name="sortby">
-                                                                    <option value="popular">Popular</option>
-                                                                    <option value="newest">Newest</option>
-                                                                </select>
-                                                            </form>
-                                                        </div>
-                                                        <div class="flex space-x-10">
-                                                            <a class="text-orange-500 hover:underline" href="">New Collection</a>
-                                                            <a class="text-orange-500 hover:underline" href="">All Products</a>
-                                                            <a class="text-orange-500 hover:underline" href="">Discounted Products</a>
-                                                            <a class="text-orange-500 hover:underline" href="">Filter by:</a>
-                                                            <a class="text-orange-500 hover:underline" href="">Availability</a>
-                                                            <a class="text-orange-500 hover:underline" href="">Discount</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                               
+                                               
                             
                                                 <!-- Medium-Sized Product Cards -->
                                                 <div class="flex flex-wrap gap-10 justify-center">

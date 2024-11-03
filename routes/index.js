@@ -158,6 +158,26 @@ router.get("/product/delete/:id", async (req, res) => {
     res.redirect("/shop?error=Failed to delete product");
   }
 });
+
+router.post("/cart/buy/:id", async (req, res) => {
+  try {
+    const itemId = req.params.id;
+    const item = await userModel.findById(itemId); // Fetch item from database
+    if (!item) {
+      return res.status(404).send("Item not found");
+    }
+    res.render("payment", { item });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server Error");
+  }
+});
+
+router.post("/cart/checkout", (req, res) => {
+  const cartItems = req.user.cart; // Assuming user cart items
+  res.render("payment", { cartItems });
+});
+
 // routes/shop.routes.js
 // Assuming user is logged in and available through req.user
 

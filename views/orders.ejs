@@ -1,8 +1,9 @@
-<!--<%- include('./partials/header') %>
 
-    <main>
+<%- include('./partials/header') %>
+
+    <main class="w-full min-h-screen px-20 py-10 bg-yellow-200">
         <section class="order-list">
-            <h2 class="text-2xl font-bold mb-6 text-gray-800">Order Details</h2>
+            <h2 class="text-2xl font-bold mb-6 text-orange-500">Order Details</h2>
 
             <% if (orders && orders.length> 0) { %>
                 <% orders.forEach(order=> { %>
@@ -13,6 +14,7 @@
 
                         <% if (order.productId) { %>
                             <div class="product-info grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Product Image -->
                                 <div class="aspect-w-16 aspect-h-9">
                                     <% if (order.productId.image && order.productId.image.length> 0) { %>
                                         <img src="data:image/jpeg;base64,<%= order.productId.image.toString('base64') %>"
@@ -23,6 +25,8 @@
                                             </div>
                                             <% } %>
                                 </div>
+
+                                <!-- Product Details -->
                                 <div class="product-details">
                                     <p class="text-gray-800 text-sm font-semibold">
                                         Product Name: <%= order.productId.name %>
@@ -31,7 +35,10 @@
                                         Quantity: <%= order.quantity %>
                                     </p>
                                     <p class="text-gray-600 text-sm">
-                                        Price: $<%= order.productId.price %>
+                                        Price per unit: ₹<%= order.productId.price %>
+                                    </p>
+                                    <p class="text-gray-800 font-semibold">
+                                        Total Price: ₹<%= order.productId.price * order.quantity %>
                                     </p>
                                 </div>
                             </div>
@@ -42,7 +49,22 @@
                                 <% } %>
                     </div>
                     <% }) %>
+
+                        <!-- Total Amount Section -->
+                        <div class="bg-white rounded-lg shadow-md p-6 mt-10">
+                            <div class="flex justify-between font-semibold text-2xl text-gray-800">
+                                <span>Total Amount for All Orders</span>
+                                <span class="text-green-600">₹ <%= totalAmount %></span>
+                            </div>
+                            <form action="/cart/checkout" method="POST">
+                                <button type="submit"
+                                    class="mt-6 w-full py-3 bg-blue-600 text-white font-bold text-lg rounded-lg hover:bg-blue-700">
+                                    Proceed to Checkout
+                                </button>
+                            </form>
+                        </div>
                         <% } else { %>
+                            <!-- No Orders Message -->
                             <p class="text-gray-600 text-center">
                                 You have no orders yet.
                             </p>
@@ -50,35 +72,5 @@
         </section>
     </main>
 
-    <%- include('./partials/footer') %>-->
-<%- include('./partials/header') %>
-
-    <div class="container mx-auto py-10">
-        <h1 class="text-2xl font-bold mb-6">Your Orders</h1>
-
-        <% if (!payments || payments.length===0) { %>
-            <p>No orders found.</p>
-            <% } else { %>
-                <% payments.forEach((payment)=> { %>
-                    <div class="order border border-gray-300 p-4 mb-4 rounded">
-                        <h3 class="font-semibold">Order ID: <%= payment._id %>
-                        </h3>
-                        <p>Date: <%= new Date(payment.date).toLocaleDateString() %>
-                        </p>
-                        <p>Total Amount: ₹ <%= payment.amount.toFixed(2) %>
-                        </p>
-                        <p>Status: <%= payment.status %>
-                        </p>
-                        <ul>
-                            <% payment.items.forEach((item)=> { %>
-                                <li>
-                                    <%= item.name %> - ₹ <%= item.price.toFixed(2) %> x <%= item.quantity %>
-                                </li>
-                                <% }) %>
-                        </ul>
-                    </div>
-                    <% }) %>
-                        <% } %>
-    </div>
-
     <%- include('./partials/footer') %>
+

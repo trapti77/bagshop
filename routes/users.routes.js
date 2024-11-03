@@ -53,25 +53,36 @@ router.get("/account", isloggedin, async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
-/*router.get("/orders", isloggedin, async (req, res) => {
+router.get("/orders", isloggedin, async (req, res) => {
   try {
     const user = await userModel
       .findById(req.user._id)
-      .populate("orders.productId");
+      .populate("orders.productId")
+      .lean();
 
     if (!user) {
-      return res.status(404).send("User not found");
+      return res.status(404).render("error", { message: "User not found" });
     }
 
-    const totalOrders = user.orders.length; // Calculate the total number of orders
-    res.render("orders", { user, orders: user.orders, totalOrders }); // Pass totalOrders to the view
+    const totalOrders = user.orders.length;
+    const totalAmount = user.orders.reduce(
+      (acc, order) => acc + order.productId.price * order.quantity,
+      0
+    );
+
+    res.render("orders", {
+      user,
+      orders: user.orders, // This is the key point - passing `orders`
+      totalOrders,
+      totalAmount,
+    });
   } catch (error) {
     console.error("Error fetching orders:", error);
-    res.status(500).send("Internal Server Error");
+    res.status(500).render("error", { message: "Internal Server Error" });
   }
 });
-*/
-router.get("/users/orders", async (req, res) => {
+
+/*router.get("/users/orders", async (req, res) => {
   try {
     const user = req.user; // Assuming req.user is set by authentication middleware
 
@@ -94,6 +105,6 @@ router.get("/users/orders", async (req, res) => {
     console.error("Error fetching orders:", error);
     res.status(500).send("Error fetching orders. Please try again.");
   }
-});
+});*/
 
 module.exports = router;

@@ -50,9 +50,9 @@
         </div>
     </div>
     <%- include('./partials/footer') %></div>-->
-    <%- include('./partials/header') %>
+   <!-- <%- include('./partials/header') %>
     
-        <!-- Success Message -->
+       
         <% if(success.length> 0){ %>
             <div
                 class="fixed top-5 left-1/2 transform -translate-x-1/2 z-50 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg">
@@ -62,15 +62,15 @@
             </div>
             <% } %>
     
-                <div class="min-h-screen bg-gray-50">
+                <div class="min-h-screen bg-yellow-200">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                         <div class="flex flex-col md:flex-row gap-8">
-                            <!-- Sidebar -->
+                           
                             <aside class="w-full md:w-64 flex-shrink-0">
                                 <div class="bg-white rounded-lg shadow-sm p-6">
-                                    <!-- Sort Controls -->
+                                  
                                     <div class="mb-8">
-                                        <h3 class="text-lg font-semibold mb-4">Sort By</h3>
+                                        <h3 class="text-lg font-semibold mb-4 text-orange-500">Sort By</h3>
                                         <form action="/blog" class="w-full">
                                             <select name="sortby"
                                                 class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
@@ -83,9 +83,9 @@
                                         </form>
                                     </div>
     
-                                    <!-- Navigation -->
+                                    
                                     <nav>
-                                        <h3 class="text-lg font-semibold mb-4">Categories</h3>
+                                        <h3 class="text-lg font-semibold mb-4 text-orange-500">Categories</h3>
                                         <div class="space-y-3">
                                             <a href="/blog/new-collection"
                                                 class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-md transition-colors">
@@ -100,13 +100,13 @@
                                 </div>
                             </aside>
     
-                            <!-- Main Content -->
+                            
                             <main class="flex-1">
                                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                     <% blogs.forEach(function(blog){ %>
                                         <article
                                             class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
-                                            <!-- Image Container -->
+                                            
                                             <div class="aspect-w-16 aspect-h-9">
                                                 <% if (blog.image) { %>
                                                     <img src="data:image/jpeg;base64,<%= blog.image %>"
@@ -125,7 +125,7 @@
                                                         <% } %>
                                             </div>
     
-                                            <!-- Content -->
+                                            
                                              <div class="p-6">
                                                 
                                             
@@ -140,7 +140,7 @@
     
                                                 <div class="mt-4 flex justify-end">
                                                     <a href="/blog/<%= blog._id %>"
-                                                        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                                        class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-blue-700 bg-orange-100 hover:bg-white-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                                                         Read More
                                                     </a>
                                                 </div>
@@ -149,7 +149,7 @@
                                         <% }) %>
                                 </div>
     
-                                <!-- Empty State -->
+                                
                                 <% if (blogs.length===0) { %>
                                     <div class="text-center py-12">
                                         <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor"
@@ -172,4 +172,193 @@
                     </div>
                 </div>
     
-                <%- include('./partials/footer') %>
+                <%- include('./partials/footer') %>-->
+
+                <%- include('./partials/header') %>
+                
+                    <!-- Success Message -->
+                    <% if(success.length> 0) { %>
+                        <div
+                            class="fixed top-5 left-1/2 transform -translate-x-1/2 z-50 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg">
+                            <span class="block">
+                                <%= success %>
+                            </span>
+                        </div>
+                        <% } %>
+                
+                            <div class="min-h-screen bg-yellow-200">
+                                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                                    <div class="flex flex-col md:flex-row gap-8">
+                                    <h1 class="font-bold text-3xl text-center text-orange-500 mb-10 inline-block">All Blogs</h1>
+                                        <!-- Sidebar -->
+                                   <!-- <aside class="w-full md:w-64 flex flex-row h-screen">
+                                            <div class="bg-white rounded-lg shadow-sm p-6">
+                                                
+                                                <div class="mb-8">
+                                                    <h3 class="text-lg font-semibold mb-4 text-orange-500">Sort By</h3>
+                                                    <form action="/blog" class="w-full">
+                                                        <select name="sortby"
+                                                            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                                                            onchange="this.form.submit()">
+                                                            <option value="newest">Newest First</option>
+                                                            <option value="oldest">Oldest First</option>
+                                                            <option value="title">Title A-Z</option>
+                                                            <option value="title-desc">Title Z-A</option>
+                                                        </select>
+                                                    </form>
+                                                </div>
+                
+                                               
+                                                <nav>
+                                                    <h3 class="text-lg font-semibold mb-4 text-orange-500">Categories</h3>
+                                                    <div class="space-y-3">
+                                                        <a href="/blog/new-collection"
+                                                            class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-md transition-colors">
+                                                            New Collection
+                                                        </a>
+                                                        <a href="/blog"
+                                                            class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-md transition-colors">
+                                                            All Blogs
+                                                        </a>
+                                                    </div>
+                                                </nav>
+                                            </div>
+                                        </aside>-->
+                                       
+                                       <!-- Main Content -->
+                                        <main class="flex-1">
+                                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                                <% blogs.forEach(function(blog){ %>
+                                                    <article
+                                                        class="fade-in bg-white rounded-lg shadow-sm overflow-hidden transform transition-transform hover:scale-105 hover:shadow-md transition-shadow">
+                                                        <!-- Image Container -->
+                                                        <div class="aspect-w-16 aspect-h-9">
+                                                            <% if (blog.image) { %>
+                                                                <img src="data:image/jpeg;base64,<%= blog.image %>"
+                                                                    alt="<%= blog.title %>" class="w-full h-48 object-cover"
+                                                                    onerror="this.onerror=null; this.src='/images/blog-placeholder.jpg';" />
+                                                                <% } else { %>
+                                                                    <div
+                                                                        class="w-full h-48 bg-gray-200 flex items-center justify-center">
+                                                                        <svg class="w-12 h-12 text-gray-400" fill="none"
+                                                                            stroke="currentColor" viewBox="0 0 24 24">
+                                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                                stroke-width="2"
+                                                                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                                        </svg>
+                                                                    </div>
+                                                                    <% } %>
+                                                        </div>
+                
+                                                        <!-- Content -->
+                                                        <div class="p-6">
+                                                            <h2 class="text-xl font-bold mb-2 text-yellow-400">
+                                                                <%= blog.title %>
+                                                            </h2>
+                
+                                                            <p class="text-gray-600 line-clamp-3">
+                                                                <%= blog.content %>
+                                                            </p>
+                
+                                                            <div class="mt-4 flex justify-end">
+                                                                <button
+                                                                    onclick="openModal('<%= blog._id %>', '<%= blog.title %>', '<%= blog.content %>')"
+                                                                    class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-gray-700 bg-orange-300 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                                                    Read More
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </article>
+                                                    <% }) %>
+                                            </div>
+                
+                                            <!-- Empty State -->
+                                            <% if (blogs.length===0) { %>
+                                                <div class="text-center py-12">
+                                                    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor"
+                                                        viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                    </svg>
+                                                    <h3 class="mt-2 text-sm font-medium text-gray-900">No blogs found</h3>
+                                                    <p class="mt-1 text-sm text-gray-500">Get started by creating a new blog post.</p>
+                                                    <div class="mt-6">
+                                                        <a href="/createblog"
+                                                            class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                                            Create New Blog
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <% } %>
+                                        </main>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <!-- Modal -->
+                            <div id="blogModal"
+                                class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 flex items-center justify-center">
+                                <div class="bg-white rounded-lg p-6 max-w-md mx-auto">
+                                    <h2 id="modalTitle" class="text-2xl font-bold mb-4"></h2>
+                                    <p id="modalContent" class="text-gray-700 mb-4"></p>
+                                    <button onclick="closeModal()"
+                                        class="mt-4 px-4 py-2 bg-orange-500 text-white rounded-lg">Close</button>
+                                </div>
+                            </div>
+                
+                            <!-- Back to Top Button -->
+                            <button id="backToTop"
+                                class="hidden fixed bottom-4 right-4 bg-blue-600 text-white p-3 rounded-full shadow-lg">↑</button>
+                
+                            <script>
+                                // Modal Logic
+                                function openModal(id, title, content) {
+                                    document.getElementById('modalTitle').textContent = title;
+                                    document.getElementById('modalTitle').style.color = "yellow";
+                                    document.getElementById('modalContent').textContent = content;
+                                    document.getElementById('blogModal').classList.remove('hidden');
+                                }
+                                function closeModal() {
+                                    document.getElementById('blogModal').classList.add('hidden');
+                                }
+
+                                // Fade-in Effect on Page Load
+                                document.addEventListener("DOMContentLoaded", function () {
+                                    const blogPosts = document.querySelectorAll(".fade-in");
+                                    blogPosts.forEach((post, index) => {
+                                        setTimeout(() => {
+                                            post.classList.add("visible");
+                                        }, index * 100); // Staggered effect
+                                    });
+                                });
+
+                                // Back to Top Button Logic
+                                window.addEventListener("scroll", () => {
+                                    const backToTop = document.getElementById("backToTop");
+                                    if (window.scrollY > 200) {
+                                        backToTop.classList.remove("hidden");
+                                    } else {
+                                        backToTop.classList.add("hidden");
+                                    }
+                                });
+
+                                document.getElementById("backToTop").addEventListener("click", () => {
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                });
+                            </script>
+                
+                            <%- include('./partials/footer') %>
+                
+                                <style>
+                                    /* Fade-in Animation */
+                                    .fade-in {
+                                        opacity: 0;
+                                        transform: translateY(10px);
+                                        transition: opacity 0.3s ease, transform 0.3s ease;
+                                    }
+                
+                                    .fade-in.visible {
+                                        opacity: 1;
+                                        transform: translateY(0);
+                                    }
+                                </style>

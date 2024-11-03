@@ -51,39 +51,41 @@
     <%- include('./partials/footer') %>-->
 <%- include('./partials/header') %>
 
-    <div class="container mx-auto py-10">
-        <h1 class="text-2xl font-bold mb-6">Payment Information</h1>
+    <div class="w-full min-h-screen px-20 py-10 bg-gray-100">
+        <h1 class="text-3xl font-bold text-gray-800 mb-8">Payment</h1>
 
-        <form action="/payments/payment" method="POST">
-            <div class="mb-6">
-                <h2 class="text-lg font-semibold text-gray-700">Order Total: ₹ <%= totalAmount.toFixed(2) %>
+        <% if (item) { %>
+            <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                <h2 class="text-2xl font-semibold text-gray-800">
+                    <%= item.name %>
                 </h2>
+                <p>Price: ₹ <%= item.price %>
+                </p>
+                <p>Discount: ₹ <%= item.discount %>
+                </p>
+                <p>Total: ₹ <%= (item.price - item.discount) * item.quantity %>
+                </p>
             </div>
+            <% } else if (cartItems) { %>
+                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <h2 class="text-2xl font-semibold text-gray-800">Cart Summary</h2>
+                    <% cartItems.forEach(item=> { %>
+                        <p>
+                            <%= item.name %> - ₹ <%= (item.price - item.discount) * item.quantity %>
+                        </p>
+                        <% }) %>
+                            <h3>Total: ₹ <%= cartItems.reduce((acc, item)=> acc + (item.price - item.discount) *
+                                    item.quantity, 0) %></h3>
+                </div>
+                <% } %>
 
-            <div class="mb-6">
-                <label for="cardName" class="block text-gray-700">Cardholder Name</label>
-                <input type="text" name="cardName" id="cardName" required class="border border-gray-300 p-2 w-full" />
-            </div>
-
-            <div class="mb-6">
-                <label for="cardNumber" class="block text-gray-700">Card Number</label>
-                <input type="text" name="cardNumber" id="cardNumber" required
-                    class="border border-gray-300 p-2 w-full" />
-            </div>
-
-            <div class="mb-6">
-                <label for="expiryDate" class="block text-gray-700">Expiry Date (MM/YY)</label>
-                <input type="text" name="expiryDate" id="expiryDate" required
-                    class="border border-gray-300 p-2 w-full" />
-            </div>
-
-            <div class="mb-6">
-                <label for="cvv" class="block text-gray-700">CVV</label>
-                <input type="text" name="cvv" id="cvv" required class="border border-gray-300 p-2 w-full" />
-            </div>
-
-            <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Proceed to Payment</button>
-        </form>
+                    <form action="/cart/payment" method="POST">
+                        <input type="hidden" name="itemId" value="<%= item ? item.id : '' %>">
+                        <button type="submit"
+                            class="w-full py-3 bg-blue-600 text-white font-bold text-lg rounded-lg hover:bg-blue-700">
+                            Confirm Payment
+                        </button>
+                    </form>
     </div>
 
     <%- include('./partials/footer') %>

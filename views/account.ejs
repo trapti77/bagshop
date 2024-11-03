@@ -71,7 +71,7 @@
         </section>
     </main>
     <%- include('./partials/footer') %>-->
-    <%- include('./partials/header') %>
+   <!-- <%- include('./partials/header') %>
         <header>
             <h1>Account Information</h1>
             <nav>
@@ -172,4 +172,132 @@
                 </form>
             </section>
         </main>
+        <%- include('./partials/footer') %>-->
+    <%- include('./partials/header') %>
+    
+        <!-- Centered Container -->
+        <div class="min-h-screen flex items-center justify-center bg-yellow-200">
+            <!-- Profile Page Content Wrapper -->
+            <div class="w-full max-w-4xl bg-white rounded-lg shadow-lg p-6">
+                <header class="text-center mb-8">
+                    <h1 class="text-3xl font-bold bg-yellow-500 text-gray-500">Account Information</h1>
+                    <nav class="mt-2">
+                        <a href="/" class="text-blue-500 hover:underline mr-4">Home</a>
+                        <a href="/logout" class="text-blue-500 hover:underline">Logout</a>
+                    </nav>
+                </header>
+    
+                <main>
+                    <!-- Profile Overview -->
+                    <section class="profile-overview mb-12 text-center">
+                        <h2 class="text-2xl font-bold mb-6 text-orange-500">Contact Information</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Profile Image -->
+                            <div class="aspect-w-16 aspect-h-9">
+                                <% if (user.image && user.image.length> 0) { %>
+                                    <img src="data:image/jpeg;base64,<%= user.image.toString('base64') %>"
+                                        alt="<%= user.fullname %>" class="w-full h-48 object-cover rounded-lg" />
+                                    <% } else { %>
+                                        <div class="w-full h-48 bg-gray-200 flex items-center justify-center rounded-lg">
+                                            <i class="ri-image-line text-gray-400 text-4xl"></i>
+                                        </div>
+                                        <% } %>
+                            </div>
+    
+                            <!-- Profile Details -->
+                            <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden p-4 text-left">
+                                <h3 class="font-semibold text-lg mb-2">
+                                    <%= user.fullname %>
+                                </h3>
+                                <p class="text-gray-600 text-sm mb-2">
+                                    <%= user.email %>
+                                </p>
+                                <p class="text-gray-600 text-sm mb-2">
+                                    <%= user.contact %>
+                                </p>
+                                <p class="text-gray-600 text-sm mb-2">Total Spent: $<%= user.totalSpent.toFixed(2) %>
+                                </p>
+                                <p class="text-gray-600 text-sm mb-2">Total Orders: <%= totalOrders %>
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+    
+                    <!-- Order History -->
+                    <section class="order-history mb-12 text-center">
+                        <h2 class="text-2xl font-bold mb-6 text-orange-500">Order History</h2>
+                        <% if (user.orders && user.orders.length> 0) { %>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <% user.orders.forEach(order=> { %>
+                                    <div class="bg-gray-50 rounded-lg shadow-md overflow-hidden p-4">
+                                        <h3 class="font-semibold text-lg mb-2">Product: <%= order.productId.name %>
+                                        </h3>
+                                        <p class="text-gray-600 text-sm mb-2">Quantity: <%= order.quantity %>
+                                        </p>
+                                        <p class="text-gray-600 text-sm mb-2">Date: <%=
+                                                order.purchaseDate.toLocaleDateString() %>
+                                        </p>
+                                    </div>
+                                    <% }) %>
+                            </div>
+                            <% } else { %>
+                                <p class="text-gray-600">No orders found.</p>
+                                <% } %>
+                    </section>
+    
+                    <!-- Edit Profile Section -->
+                    <section class="edit-profile mb-12 text-center">
+                        <h2 class="text-2xl font-bold mb-6 text-orange-500">Edit Profile</h2>
+                        <form action="/account/edit" method="POST" enctype="multipart/form-data"
+                            class="space-y-4 text-left">
+                            <!-- Hidden File Input -->
+                            <input type="file" id="profilePhoto" name="profilePhoto" accept="image/*" class="hidden">
+                            
+                            <!-- Styled Label Acting as Button -->
+                            <label for="profilePhoto" class="inline-block bg-orange-500 text-white py-2 px-4 rounded cursor-pointer">
+                                Select Profile Photo
+                            </label>
+
+    
+                            <label for="fullname" class="block">Name:</label>
+                            <input type="text" id="fullname" name="name" value="<%= user.fullname %>" required
+                                class="w-full py-2 px-4 border rounded">
+    
+                            <label for="email" class="block">Email:</label>
+                            <input type="email" id="email" name="email" value="<%= user.email %>" required
+                                class="w-full py-2 px-4 border rounded">
+    
+                            <label for="contact" class="block">Mobile Number:</label>
+                            <input type="text" id="contact" name="mobileNumber" value="<%= user.contact %>" required
+                                class="w-full py-2 px-4 border rounded">
+    
+                            <button type="submit" class="bg-orange-500 text-white py-2 px-4 rounded w-full">Update
+                                Profile</button>
+                        </form>
+                    </section>
+    
+                    <!-- Change Password Section -->
+                    <section class="change-password text-center">
+                        <h2 class="text-2xl font-bold mb-6 text-orange-500">Change Password</h2>
+                        <form action="/account/change-password" method="POST" class="space-y-4 text-left">
+                            <label for="currentPassword" class="block">Current Password:</label>
+                            <input type="password" id="currentPassword" name="currentPassword" required
+                                class="w-full py-2 px-4 border rounded">
+    
+                            <label for="newPassword" class="block">New Password:</label>
+                            <input type="password" id="newPassword" name="newPassword" required
+                                class="w-full py-2 px-4 border rounded">
+    
+                            <label for="confirmPassword" class="block">Confirm New Password:</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required
+                                class="w-full py-2 px-4 border rounded">
+    
+                            <button type="submit" class="bg-orange-500 text-white py-2 px-4 rounded w-full">Change
+                                Password</button>
+                        </form>
+                    </section>
+                </main>
+            </div>
+        </div>
+    
         <%- include('./partials/footer') %>

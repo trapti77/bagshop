@@ -61,7 +61,7 @@
         </div>
     </div>
     <%- include('./partials/footer') %>-->
-    <%- include('./partials/header') %>
+  <!--<%- include('./partials/header') %>
     
         <% if (success.length> 0) { %>
             <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-blue-500">
@@ -71,29 +71,29 @@
             </div>
             <% } %>
     
-                <div class="w-full h-screen flex items-start px-20 py-20">
-                    <div class="w-[25%] flex h-screen flex-col items-start">
-                        <div class="flex items-center gap-2">
-                            <h3>Sort by</h3>
+                <div class="w-full h-full flex items-start px-20 py-20 bg-yellow-200">
+                  
+                <div class="w-full bg-yellow-200 shadow-lg mb-10 flex flex-row">
+                    <div class="flex justify-between items-center px-20 py-4">
+                        <div class="flex items-center gap-4">
+                            <h3 class="font-semibold">Sort by:</h3>
                             <form action="/shop">
-                                <select class="border-[1px] px-2 py-1" name="sortby" id="">
+                                <select class="border border-gray-400 px-2 py-1 rounded" name="sortby">
                                     <option value="popular">Popular</option>
                                     <option value="newest">Newest</option>
                                 </select>
                             </form>
                         </div>
-                        <div class="flex flex-col mt-20">
-                            <a class="block w-fit mb-2" href="">New Collection</a>
-                            <a class="block w-fit mb-2" href="">All Products</a>
-                            <a class="block w-fit mb-2" href="">Discounted Products</a>
-                        </div>
-                        <div class="mt-32">
-                            <a class="block w-fit mb-2" href="">Filter by:</a>
-                            <a class="block w-fit mb-2" href="">Availability</a>
-                            <a class="block w-fit mb-2" href="">Discount</a>
+                        <div class="flex space-x-10">
+                            <a class="text-blue-600 hover:underline" href="">New Collection</a>
+                            <a class="text-blue-600 hover:underline" href="">All Products</a>
+                            <a class="text-blue-600 hover:underline" href="">Discounted Products</a>
+                            <a class="text-blue-600 hover:underline" href="">Filter by:</a>
+                            <a class="text-blue-600 hover:underline" href="">Availability</a>
+                            <a class="text-blue-600 hover:underline" href="">Discount</a>
                         </div>
                     </div>
-    
+                </div>
                     <div class="w-[75%] flex flex-col gap-5 h-screen">
                         <div class="flex items-start gap-5">
                             <% products.forEach(function(product) { %>
@@ -117,13 +117,13 @@
                                             </h4>
                                         </div>
                                         <div class="flex gap-2">
-                                            <!-- Add to Cart Button -->
+                                            
                                             <a class="w-7 h-7 flex items-center justify-center rounded-full bg-white"
                                                 href="/addtocart/<%= product._id %>">
                                                 <i class="ri-add-line"></i>
                                             </a>
     
-                                            <!-- Buy Now Button -->
+                                           
                                             <form action="/buy/<%= product._id %>" method="POST">
                                                 <button type="submit"
                                                     class="w-7 h-7 flex items-center justify-center rounded-full bg-green-500 text-white hover:bg-green-600">
@@ -138,4 +138,277 @@
                     </div>
                 </div>
     
-                <%- include('./partials/footer') %>
+                <%- include('./partials/footer') %>-->
+              <!--<%- include('./partials/header') %>
+            
+                <% if (success.length> 0) { %>
+                    <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-blue-500">
+                        <span class="inline-block mt-1 mb-1 text-white">
+                            <%= success %>
+                        </span>
+                    </div>
+                    <% } %>
+            
+                        <div class="w-full h-full flex flex-col items-start px-20 py-20 bg-yellow-200">
+            
+                            
+                            <div class="w-full mb-10 h-4/5">
+                                <div class="relative overflow-hidden rounded-md shadow-lg">
+                                    <div class="carousel flex transition-transform duration-500 ease-out" id="carousel">
+                                       
+                                        <div class="min-w-full h-64 flex items-center justify-center bg-blue-500">
+                                            <img src="https://via.placeholder.com/800x400?text=Slide+1" alt="Slide 1"
+                                                class="h-full object-cover w-full">
+                                        </div>
+                                       
+                                        <div class="min-w-full h-64 flex items-center justify-center bg-blue-500">
+                                            <img src="https://via.placeholder.com/800x400?text=Slide+2" alt="Slide 2"
+                                                class="h-full object-cover w-full">
+                                        </div>
+                                      
+                                        <div class="min-w-full h-64 flex items-center justify-center bg-blue-500">
+                                            <img src="https://via.placeholder.com/800x400?text=Slide+3" alt="Slide 3"
+                                                class="h-full object-cover w-full">
+                                        </div>
+                                    </div>
+                                   
+                                    <button
+                                        class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-700 text-white px-4 py-2"
+                                        onclick="prevSlide()">❮</button>
+                                    <button
+                                        class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-700 text-white px-4 py-2"
+                                        onclick="nextSlide()">❯</button>
+                                </div>
+                            </div>
+            
+                          
+                            <div class="w-full flex flex-col gap-5 h-screen">
+                                <div class="w-full bg-yellow-200 shadow-lg mb-10 flex flex-row">
+                                    <div class="flex justify-between items-center px-20 py-4">
+                                        <div class="flex items-center gap-4 text-orange-500">
+                                            <h3 class="font-semibold">Sort by:</h3>
+                                            <form action="/shop">
+                                                <select class="border border-gray-400 px-2 py-1 rounded" name="sortby">
+                                                    <option value="popular">Popular</option>
+                                                    <option value="newest">Newest</option>
+                                                </select>
+                                            </form>
+                                        </div>
+                                        <div class="flex space-x-10">
+                                            <a class="text-orange-500 hover:underline" href="">New Collection</a>
+                                            <a class="text-orange-500 hover:underline" href="">All Products</a>
+                                            <a class="text-orange-500 hover:underline" href="">Discounted Products</a>
+                                            <a class="text-orange-500 hover:underline" href="">Filter by:</a>
+                                            <a class="text-orange-500 hover:underline" href="">Availability</a>
+                                            <a class="text-orange-500 hover:underline" href="">Discount</a>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                               
+                                <div class="flex flex-wrap gap-10 justify-center">
+                                    <% products.forEach(function(product) { %>
+                                        <div class="w-72 bg-white shadow-md rounded-lg overflow-hidden">
+                                            <div class="w-full h-56 flex items-center justify-center bg-[<%= product.bgcolor %>]">
+                                                <% if (product.image) { %>
+                                                    <img class="h-full object-cover"
+                                                        src="data:image/jpeg;base64,<%= product.image %>" alt="">
+                                                    <% } else { %>
+                                                        <div class="h-full flex items-center justify-center bg-gray-300">
+                                                            <p>No Image Available</p>
+                                                        </div>
+                                                        <% } %>
+                                            </div>
+                                            <div
+                                                class="flex justify-between bg-[<%= product.panelcolor %>] items-center px-4 py-4 text-[<%= product.textcolor %>]">
+                                                <div>
+                                                    <h3 class="text-lg font-semibold">
+                                                        <%= product.name %>
+                                                    </h3>
+                                                    <h4 class="text-md font-medium">₹ <%= product.price %>
+                                                    </h4>
+                                                </div>
+                                                <div class="flex gap-2">
+                                                    <a class="w-8 h-8 flex items-center justify-center rounded-full bg-white shadow-md hover:bg-gray-200 transition"
+                                                        href="/addtocart/<%= product._id %>">
+                                                        <i class="ri-add-line"></i>
+                                                    </a>
+                                                    <form action="/buy/<%= product._id %>" method="POST">
+                                                        <button type="submit"
+                                                            class="w-8 h-8 flex items-center justify-center rounded-full bg-green-500 text-white shadow-md hover:bg-green-600 transition">
+                                                            <i class="ri-shopping-bag-line"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% }) %>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <%- include('./partials/footer') %>
+            
+                            <script>
+                                let currentSlide = 0;
+                                const slides = document.querySelectorAll("#carousel > div");
+
+                                function showSlide(index) {
+                                    const carousel = document.getElementById("carousel");
+                                    carousel.style.transform = `translateX(-${index * 100}%)`;
+                                }
+
+                                function prevSlide() {
+                                    currentSlide = (currentSlide === 0) ? slides.length - 1 : currentSlide - 1;
+                                    showSlide(currentSlide);
+                                }
+
+                                function nextSlide() {
+                                    currentSlide = (currentSlide === slides.length - 1) ? 0 : currentSlide + 1;
+                                    showSlide(currentSlide);
+                                }
+                            </script>-->
+
+                            <%- include('./partials/header') %>
+                            
+                                <% if (success.length> 0) { %>
+                                    <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-blue-500">
+                                        <span class="inline-block mt-1 mb-1 text-white">
+                                            <%= success %>
+                                        </span>
+                                    </div>
+                                    <% } %>
+                            
+                                        <div class="w-full h-full flex flex-col items-start px-20 py-20 bg-yellow-200">
+                            
+                                            <!-- Slide Section (Carousel) -->
+                                            <div class="w-full mb-10">
+                                                <div class="relative overflow-hidden rounded-md shadow-lg">
+                                                    <div class="carousel flex transition-transform duration-500 ease-out" style="height:70vh;width:100%" id="carousel">
+                                                        <!-- Slide 1 with random image -->
+                                                        <div class="min-w-full h-84 flex items-center justify-center bg-blue-500">
+                                                            <img src="https://via.placeholder.com/800x400?text=Slide+1" alt="Slide 1"
+                                                                class="h-full object-cover w-full">
+                                                        </div>
+                                                        <!-- Slide 2 with random image -->
+                                                        <div class="min-w-full h-84 flex items-center justify-center bg-blue-500">
+                                                            <img src="https://via.placeholder.com/800x400?text=Slide+2" alt="Slide 2"
+                                                                class="h-full object-cover w-full">
+                                                        </div>
+                                                        <!-- Slide 3 with random image -->
+                                                        <div class="min-w-full h-84 flex items-center justify-center bg-blue-500">
+                                                            <img src="https://via.placeholder.com/800x400?text=Slide+3" alt="Slide 3"
+                                                                class="h-full object-cover w-full">
+                                                        </div>
+                                                        <!--slode4-->
+                                                        <div class="min-w-full h-84 flex items-center justify-center bg-blue-500">
+                                                            <img src="https://via.placeholder.com/800x400?text=Slide+3" alt="Slide 4" class="h-full object-cover w-full">
+                                                        </div>
+                                                    </div>
+                                                    <!-- Carousel Controls -->
+                                                    <button
+                                                        class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-700 text-white px-4 py-2"
+                                                        onclick="prevSlide()">❮</button>
+                                                    <button
+                                                        class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-700 text-white px-4 py-2"
+                                                        onclick="nextSlide()">❯</button>
+                                                </div>
+                                            </div>
+                            
+                                            <!-- Products Section -->
+                                            <div class="w-full flex flex-col gap-5 h-screen">
+                                                <div class="w-full bg-yellow-200 shadow-lg mb-10 flex flex-row">
+                                                    <div class="flex justify-between items-center px-20 py-4">
+                                                        <div class="flex items-center gap-4 text-orange-500">
+                                                            <h3 class="font-semibold">Sort by:</h3>
+                                                            <form action="/shop">
+                                                                <select class="border border-gray-400 px-2 py-1 rounded" name="sortby">
+                                                                    <option value="popular">Popular</option>
+                                                                    <option value="newest">Newest</option>
+                                                                </select>
+                                                            </form>
+                                                        </div>
+                                                        <div class="flex space-x-10">
+                                                            <a class="text-orange-500 hover:underline" href="">New Collection</a>
+                                                            <a class="text-orange-500 hover:underline" href="">All Products</a>
+                                                            <a class="text-orange-500 hover:underline" href="">Discounted Products</a>
+                                                            <a class="text-orange-500 hover:underline" href="">Filter by:</a>
+                                                            <a class="text-orange-500 hover:underline" href="">Availability</a>
+                                                            <a class="text-orange-500 hover:underline" href="">Discount</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                            
+                                                <!-- Medium-Sized Product Cards -->
+                                                <div class="flex flex-wrap gap-10 justify-center">
+                                                    <% products.forEach(function(product) { %>
+                                                        <div class="w-72 bg-white shadow-md rounded-lg overflow-hidden">
+                                                            <div class="w-full h-56 flex items-center justify-center bg-[<%= product.bgcolor %>]">
+                                                                <% if (product.image) { %>
+                                                                    <img class="h-full object-cover"
+                                                                        src="data:image/jpeg;base64,<%= product.image %>" alt="">
+                                                                    <% } else { %>
+                                                                        <div class="h-full flex items-center justify-center bg-gray-300">
+                                                                            <p>No Image Available</p>
+                                                                        </div>
+                                                                        <% } %>
+                                                            </div>
+                                                            <div
+                                                                class="flex justify-between bg-[<%= product.panelcolor %>] items-center px-4 py-4 text-[<%= product.textcolor %>]">
+                                                                <div>
+                                                                    <h3 class="text-lg font-semibold">
+                                                                        <%= product.name %>
+                                                                    </h3>
+                                                                    <h4 class="text-md font-medium">₹ <%= product.price %>
+                                                                    </h4>
+                                                                </div>
+                                                                <div class="flex gap-2">
+                                                                    <a class="w-8 h-8 flex items-center justify-center rounded-full bg-yellow-500 shadow-md hover:bg-gray-200 transition text-white"
+                                                                        href="/addtocart/<%= product._id %>">
+                                                                        <i class="ri-add-line"></i>
+                                                                    </a>
+                                                                    <form action="/buy/<%= product._id %>" method="POST">
+                                                                        <button type="submit"
+                                                                            class="w-8 h-8 flex items-center justify-center rounded-full bg-orange-500 text-white shadow-md hover:bg-gray-600 transition">
+                                                                            <i class="ri-shopping-bag-line"></i>
+                                                                        </button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <% }) %>
+                                                </div>
+                                            </div>
+                                        </div>
+                            
+                                        <%- include('./partials/footer') %>
+                            
+                                            <script>
+                                                let currentSlide = 0;
+                                                const slides = document.querySelectorAll("#carousel > div");
+
+                                                function showSlide(index) {
+                                                    const carousel = document.getElementById("carousel");
+                                                    carousel.style.transform = `translateX(-${index * 100}%)`;
+                                                }
+
+                                                function prevSlide() {
+                                                    currentSlide = (currentSlide === 0) ? slides.length - 1 : currentSlide - 1;
+                                                    showSlide(currentSlide);
+                                                }
+
+                                                function nextSlide() {
+                                                    currentSlide = (currentSlide === slides.length - 1) ? 0 : currentSlide + 1;
+                                                    showSlide(currentSlide);
+                                                }
+
+                                                // Auto-slide every 3 seconds
+                                                let autoSlideInterval = setInterval(nextSlide, 3000);
+
+                                                // Pause auto-slide on hover and resume on mouse leave
+                                                const carouselContainer = document.querySelector(".carousel");
+                                                carouselContainer.addEventListener("mouseenter", () => clearInterval(autoSlideInterval));
+                                                carouselContainer.addEventListener("mouseleave", () => {
+                                                    autoSlideInterval = setInterval(nextSlide, 3000);
+                                                });
+                                            </script>

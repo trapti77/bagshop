@@ -24,3 +24,5 @@ textcolor
 /admin->admin panel
 /owner/products->show all products
 /owner/admin->show admin panel to create product
+cart/buy/id--------after this payment page open and then submit-------then money sent to owners account
+//then this prouduct details go should go into---(1)orders page---(2)admin orders-details

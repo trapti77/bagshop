@@ -1,7 +1,7 @@
 
 <%- include('./partials/header') %>
 
-    <div class="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+    <div class="min-h-screen flex flex-col items-center justify-center bg-yellow-200">
         <!-- Success Message -->
         <% if (success && success.length> 0) { %>
             <div class="p-3 mb-4 rounded-md bg-green-500 text-white">
@@ -19,7 +19,7 @@
                         <!-- Contact Form -->
                         <form action="/contacts/create" method="POST"
                             class="w-full max-w-md bg-white p-8 rounded-md shadow">
-                            <h2 class="text-2xl font-semibold mb-6">Contact Us</h2>
+                            <h2 class="text-2xl font-semibold mb-6 text-orange-500">Contact Us</h2>
 
                             <div class="mb-4">
                                 <label for="name" class="block text-gray-700">Name</label>
@@ -42,7 +42,7 @@
                                     required></textarea>
                             </div>
 
-                            <button type="submit" class="w-full py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                            <button type="submit" class="w-full py-2 bg-orange-500 text-white rounded hover:bg-blue-600">
                                 Submit
                             </button>
                         </form>

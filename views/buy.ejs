@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Delivery - Shoes</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Ensure styles.css is served from the public folder -->
+</head>
+
+<body>
+    <div class="container">
+        <h1>Order Delivery</h1>
+        <form id="deliveryForm" class="form" method="POST" action="/submit-order">
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Delivery Address</label>
+                <textarea id="address" name="address" placeholder="Enter your delivery address" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+            </div>
+            <div class="order-summary">
+                <h2>Order Summary</h2>
+                <p>Shoe Model: <%= shoeModel %>
+                </p>
+                <p>Size: <%= shoeSize %>
+                </p>
+                <p>Price: <%= shoePrice %>
+                </p>
+            </div>
+            <button type="submit" class="btn">Confirm Order</button>
+        </form>
+        <div id="successMessage" class="success-message" hidden>
+            <h2>Thank you!</h2>
+            <p>Your order has been placed successfully. We’ll deliver your shoes shortly.</p>
+        </div>
+    </div>
+    <script src="/script.js"></script> <!-- Ensure script.js is served from the public folder -->
+</body>
+
+</html>

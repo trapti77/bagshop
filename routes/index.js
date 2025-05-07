@@ -35,6 +35,13 @@ router.get("/addtocart/:productid", isloggedin, async function (req, res) {
   res.redirect("/shop");
 });
 
+router.get("/buy/:productid", isloggedin, async function (req, res) {
+  let user = await userModel.findOne({ email: req.user.email });
+  user.cart.push(req.params.productid);
+  await user.save();
+  req.flash("success", " payment page open");
+  res.redirect("/payment");
+});
 /*router.get("/addtocart/:productid", isloggedin, async function (req, res) {
   try {
     // Find the user by email
